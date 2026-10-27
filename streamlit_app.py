@@ -210,6 +210,11 @@ def set_page(name: str) -> None:
     st.session_state.page_nav = name
 
 
+def open_shortlisted_creator(name: str) -> None:
+    st.session_state.page_nav = "Creators"
+    st.session_state.creator_search = name
+
+
 def render_sidebar() -> str:
     with st.sidebar:
         st.markdown('<div class="brand-wordmark">B&amp;B Studio</div><div class="brand-subtitle">Blush &amp; Buzz</div>', unsafe_allow_html=True)
@@ -223,7 +228,14 @@ def render_sidebar() -> str:
             for creator_id in shortlist:
                 row = creators[creators.creator_id == creator_id]
                 if not row.empty:
-                    st.caption(f"✦ {row.iloc[0]['name']}")
+                    creator_name = str(row.iloc[0]["name"])
+                    st.button(
+                        f"✦ {creator_name}",
+                        key=f"sidebar_creator_{creator_id}",
+                        on_click=open_shortlisted_creator,
+                        args=(creator_name,),
+                        width="stretch",
+                    )
         else:
             st.caption("Save creators while you explore.")
         st.markdown("<br><small>Demo creator profiles • Analytics based on historical data</small>", unsafe_allow_html=True)
@@ -260,7 +272,7 @@ def render_creators() -> None:
     st.markdown('<div class="eyebrow">The creator edit</div><h1>Distinct voices.<br><em>Beautiful perspectives.</em></h1><p class="page-lede">Discover beauty creators whose individuality, creativity, and communities make every collaboration meaningful.</p>', unsafe_allow_html=True)
     creators = load_creators()
     search_col, niche_col, sort_col = st.columns([1.4, 1, 1])
-    search = search_col.text_input("Search by creator name")
+    search = search_col.text_input("Search by creator name", key="creator_search")
     niches = ["All categories", *sorted(creators.niche.unique())]
     niche = niche_col.selectbox("Beauty category", niches)
     sort = sort_col.selectbox("Sort", ["Featured", "Followers: high to low", "Followers: low to high", "Engagement: high to low"])
@@ -298,15 +310,32 @@ def render_matchmaker() -> None:
     st.caption("Rankings use category, audience, engagement, location, and demonstration fee data. Campaign goal is context only and is not scored.")
     if submitted:
         if not campaign_name.strip():
+            st.session_state.match_results = []
             st.warning("Add a campaign or product name to complete the brief.")
             return
         matches = find_matches(niche=niche, budget=budget, audience=audience, location=None if location == "Any location" else location)
         if not matches:
+            st.session_state.match_results = []
             st.info("No creators fit this budget. Increase the budget or broaden the brief.")
             return
-        st.markdown(f'<div class="section-intro"><div class="eyebrow">Ranked recommendations</div><h2>Strongest connections for <em>{campaign_name}</em>.</h2></div>', unsafe_allow_html=True)
-        for match in matches[:5]:
+        st.session_state.match_results = matches[:5]
+        st.session_state.match_campaign_name = campaign_name.strip()
+
+    matches = st.session_state.get("match_results", [])
+    if matches:
+        saved_campaign_name = st.session_state.get("match_campaign_name", "your campaign")
+        st.markdown(f'<div class="section-intro"><div class="eyebrow">Ranked recommendations</div><h2>Strongest connections for <em>{saved_campaign_name}</em>.</h2></div>', unsafe_allow_html=True)
+        shortlist = st.session_state.setdefault("shortlist", [])
+        for match in matches:
+            creator_id = int(match["creator_id"])
             st.markdown(f'<article class="match-card"><div class="match-score">{match["match_score"]:.0f}% match · {match["niche"]}</div><h3>{match["name"]}</h3><p>{compact_number(match["followers"])} followers · {match["engagement_rate"]:.1f}% engagement</p><p>{" · ".join(match["reasons"])}</p></article>', unsafe_allow_html=True)
+            label = "Remove from shortlist" if creator_id in shortlist else "Add to shortlist"
+            if st.button(label, key=f"match_shortlist_{creator_id}", width="stretch"):
+                if creator_id in shortlist:
+                    shortlist.remove(creator_id)
+                else:
+                    shortlist.append(creator_id)
+                st.rerun()
 
 
 def render_analytics() -> None:
