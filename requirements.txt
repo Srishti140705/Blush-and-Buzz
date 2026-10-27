@@ -1,8 +1,5 @@
-fastapi
-uvicorn
+flask
 pandas
-numpy
 requests
 beautifulsoup4
-plotly
-python-multipart
+gunicorn
