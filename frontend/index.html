@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="B&B Studio — a curated home for beauty creators, campaign matching, and thoughtful influence insights.">
+  <title>B&amp;B Studio | Blush &amp; Buzz</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%233B010B'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Georgia' font-size='26' fill='%23F2D9A0'%3EB%26B%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=DM+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="B and B Studio home">
+        <span class="brand-primary">B&amp;B Studio</span>
+        <span class="brand-secondary">Blush &amp; Buzz</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span></span><span></span>
+      </button>
+
+      <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation">
+        <a class="is-active" href="/" aria-current="page">Home</a>
+        <a href="/creators.html">Creators</a>
+        <a href="/match.html">Matchmaker</a>
+        <a href="/analytics.html">Analytics</a>
+        <a href="/atelier.html">Data Atelier</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <button class="how-it-works-card" type="button" data-modal-open aria-haspopup="dialog" aria-controls="how-it-works-modal">
+          <span class="how-card-kicker">New to B&amp;B Studio?</span>
+          <span class="how-card-title">See how it works <span aria-hidden="true">↗</span></span>
+          <span class="how-card-description">Discover what you can create with us.</span>
+        </button>
+        <p class="eyebrow">A new language of beauty influence</p>
+        <h1 id="hero-title">Where beauty<br><em>meets influence.</em></h1>
+        <p class="hero-description">Discover inspiring creators, explore meaningful insights, and find the perfect voice for your next campaign.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="/creators.html">Explore Creators <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="/match.html">Find Your Match <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <figure class="hero-art">
+        <img src="/assets/images/hero_beauty_still_life.jpg" alt="Luxury beauty product still-life with lipstick, perfume, and metallic cosmetic cases" fetchpriority="high">
+      </figure>
+    </section>
+
+    <section class="editorial-note" aria-label="Our point of view">
+      <p>Beauty is personal.</p>
+      <p class="editorial-note-main">Influence should feel that way, too.</p>
+      <span>Curated connections, grounded in real insight.</span>
+    </section>
+
+    <section class="creators-section section" aria-labelledby="creators-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Creator spotlight</p>
+          <h2 id="creators-title">Faces shaping<br><em>what comes next.</em></h2>
+        </div>
+        <div class="section-intro">
+          <p>A considered selection of beauty voices with distinct points of view and genuinely engaged communities.</p>
+          <a class="text-link" href="/creators.html">View the directory <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div id="creator-grid" class="creator-grid" aria-live="polite" aria-busy="true">
+        <div class="loading-state"><span class="loading-line"></span><span>Curating creator profiles…</span></div>
+      </div>
+
+      <div class="creator-section-footer">
+        <p class="portrait-disclosure">All creator profiles and portraits shown are fictional and AI-generated.</p>
+        <a class="text-link" href="/creators.html">Explore all creators <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="matchmaker-section section" aria-labelledby="matchmaker-title">
+      <div class="matchmaker-index" aria-hidden="true">02</div>
+      <div class="matchmaker-copy">
+        <p class="eyebrow eyebrow-light">Campaign matchmaker</p>
+        <h2 id="matchmaker-title">Find the voice that feels <em>inevitable.</em></h2>
+        <p>Bring your campaign vision, audience, and budget. We’ll surface creators whose style and community align with what you want to say.</p>
+        <a class="button button-light" href="/match.html">Meet your match <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="matchmaker-mark" aria-hidden="true">
+        <span>B</span><i>&amp;</i><span>B</span>
+      </div>
+    </section>
+
+    <section class="analytics-section section" aria-labelledby="analytics-title">
+      <div class="analytics-copy">
+        <p class="eyebrow">Measured beautifully</p>
+        <h2 id="analytics-title">Clarity behind<br><em>the creativity.</em></h2>
+        <p>See the landscape at a glance. Our studio turns creator data into a quieter, clearer foundation for confident decisions.</p>
+        <a class="text-link" href="/analytics.html">Explore analytics <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div id="analytics-preview" class="analytics-preview" aria-live="polite" aria-busy="true">
+        <div class="analytics-loading">Preparing the studio view…</div>
+      </div>
+    </section>
+
+    <section class="closing-note" aria-label="B and B Studio philosophy">
+      <span class="closing-monogram" aria-hidden="true">B&amp;B</span>
+      <p>Editorial instinct.<br><em>Intelligent connection.</em></p>
+    </section>
+  </main>
+
+  <div id="how-it-works-modal" class="modal-backdrop" data-modal hidden>
+    <div class="how-modal" role="dialog" aria-modal="true" aria-labelledby="how-modal-title" aria-describedby="how-modal-description">
+      <button class="modal-close" type="button" data-modal-close aria-label="Close how it works dialog">
+        <span aria-hidden="true">×</span>
+      </button>
+      <p class="eyebrow">Your studio guide</p>
+      <h2 id="how-modal-title">Create with<br><em>clarity.</em></h2>
+      <p id="how-modal-description" class="modal-intro">Four considered ways to move from inspiration to a more confident campaign direction.</p>
+      <ol class="modal-steps">
+        <li><span>01</span><div><strong>Discover Creators</strong><p>Browse fictional beauty creator profiles.</p></div></li>
+        <li><span>02</span><div><strong>Find Your Match</strong><p>Get rule-based recommendations based on campaign preferences.</p></div></li>
+        <li><span>03</span><div><strong>Explore Insights</strong><p>Analyze historical influencer data.</p></div></li>
+        <li><span>04</span><div><strong>Explore the Data</strong><p>See web scraping and structured extraction.</p></div></li>
+      </ol>
+      <a class="button button-primary" href="/creators.html">Explore Creators <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <a class="brand brand-footer" href="/">
+        <span class="brand-primary">B&amp;B Studio</span>
+        <span class="brand-secondary">Blush &amp; Buzz</span>
+      </a>
+      <p>A refined space for discovering beauty creators, understanding influence, and building campaigns with resonance.</p>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="/">Home</a>
+      <a href="/creators.html">Creators</a>
+      <a href="/match.html">Matchmaker</a>
+      <a href="/analytics.html">Analytics</a>
+      <a href="/atelier.html">Data Atelier</a>
+    </nav>
+    <div class="footer-meta">
+      <span>Beauty, thoughtfully connected.</span>
+      <span>&copy; <span data-year></span> B&amp;B Studio</span>
+    </div>
+  </footer>
+</body>
+</html>

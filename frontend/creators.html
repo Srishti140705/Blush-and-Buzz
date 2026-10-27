@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" data-page="creators">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Discover the fictional beauty creators featured by B&B Studio.">
+  <title>The Creator Edit | B&amp;B Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=DM+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css"><script src="/js/pages.js" defer></script>
+</head>
+<body class="interior-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header"><div class="nav-shell">
+    <a class="brand" href="/" aria-label="B and B Studio home"><span class="brand-primary">B&amp;B Studio</span><span class="brand-secondary">Blush &amp; Buzz</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation"><span class="sr-only">Toggle navigation</span><span></span><span></span></button>
+    <nav id="primary-navigation" class="primary-nav" aria-label="Primary navigation"><a href="/">Home</a><a class="is-active" href="/creators.html" aria-current="page">Creators</a><a href="/match.html">Matchmaker</a><a href="/analytics.html">Analytics</a><a href="/atelier.html">Data Atelier</a></nav>
+    <button class="shortlist-toggle" type="button" data-shortlist-open>Shortlist <span data-shortlist-count>0</span></button>
+  </div></header>
+  <main id="main-content">
+    <section class="page-hero page-hero-split"><div><p class="eyebrow eyebrow-light">Curated voices</p><h1>The Creator <em>Edit.</em></h1></div><div><p class="page-subtitle">Distinct voices. Beautiful perspectives.</p><p>Discover beauty creators whose individuality, creativity, and communities make every collaboration meaningful.</p></div></section>
+    <section class="directory-section section-compact" aria-labelledby="directory-title">
+      <div class="directory-heading"><div><p class="eyebrow">The collective</p><h2 id="directory-title">Find your<br><em>next voice.</em></h2></div><p class="data-disclosure">Fictional creator personas and demonstration metrics.</p></div>
+      <form class="filter-bar" data-creator-filters>
+        <label><span>Search</span><input type="search" name="search" placeholder="Search by name" autocomplete="off"></label>
+        <label><span>Category</span><select name="niche"><option value="">All categories</option></select></label>
+        <label><span>Sort</span><select name="sort"><option value="featured">Featured</option><option value="followers-desc">Followers: high to low</option><option value="followers-asc">Followers: low to high</option><option value="engagement-desc">Engagement: high to low</option></select></label>
+      </form>
+      <div class="directory-grid" data-creator-directory aria-live="polite" aria-busy="true"><div class="page-state">Curating the directory…</div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="footer-brand"><a class="brand brand-footer" href="/"><span class="brand-primary">B&amp;B Studio</span><span class="brand-secondary">Blush &amp; Buzz</span></a><p>Creator discovery, thoughtful matching, and practical data craft in one editorial studio.</p></div><nav class="footer-nav" aria-label="Footer navigation"><a href="/">Home</a><a href="/creators.html">Creators</a><a href="/match.html">Matchmaker</a><a href="/analytics.html">Analytics</a><a href="/atelier.html">Data Atelier</a></nav><div class="footer-meta"><span>Beauty, thoughtfully connected.</span><span>&copy; <span data-year></span> B&amp;B Studio</span></div></footer>
+  <aside class="shortlist-drawer" data-shortlist-drawer aria-hidden="true" aria-labelledby="shortlist-title"><div class="drawer-head"><div><p class="eyebrow eyebrow-light">Saved creators</p><h2 id="shortlist-title">Your shortlist.</h2></div><button type="button" data-shortlist-close aria-label="Close shortlist">×</button></div><div data-shortlist-items></div></aside><div class="drawer-scrim" data-shortlist-scrim hidden></div>
+</body></html>
