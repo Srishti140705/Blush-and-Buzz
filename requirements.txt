@@ -1,5 +1,7 @@
 flask
+streamlit
 pandas
+plotly
 requests
 beautifulsoup4
 gunicorn
