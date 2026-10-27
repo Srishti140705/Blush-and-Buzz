@@ -43,7 +43,7 @@ PALETTE = {
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap');
     :root { --champagne:#F2E5C6; --sand:#F2D9A0; --burgundy:#75162D; --maroon:#560B18; --wine:#3B010B; }
     html, body, [class*="css"] { font-family:'DM Sans',sans-serif; color:var(--wine); }
     .stApp { background:var(--champagne); }
@@ -53,7 +53,7 @@ st.markdown(
     [data-testid="stSidebar"] .stRadio label { padding:.35rem .5rem; border-bottom:1px solid rgba(242,217,160,.25); }
     [data-testid="stSidebar"] [data-baseweb="radio"] > div:first-child { border-color:var(--sand); }
     .block-container { max-width:1500px; padding-top:2rem; padding-bottom:4rem; }
-    h1,h2,h3,.editorial-title,.brand-wordmark { font-family:'Cormorant Garamond',serif !important; font-weight:500 !important; letter-spacing:-.035em; }
+    h1,h2,h3,.editorial-title,.brand-wordmark { font-family:'Bodoni Moda',serif !important; font-weight:500 !important; letter-spacing:-.045em; }
     h1 { color:var(--wine) !important; font-size:clamp(3.6rem,7vw,7rem) !important; line-height:.9 !important; }
     h2 { color:var(--wine) !important; font-size:clamp(2.5rem,4.5vw,4.8rem) !important; line-height:.95 !important; }
     h3 { color:var(--wine) !important; }
@@ -67,19 +67,45 @@ st.markdown(
     .hero-panel h1 { margin:.3rem 0 1.4rem; }
     .hero-panel em { font-weight:400; }
     .editorial-band { margin:1.5rem 0 3rem; padding:1.25rem 1.5rem; display:flex; justify-content:space-between; gap:2rem; color:var(--champagne); background:var(--wine); }
-    .editorial-band strong { font:italic 1.35rem 'Cormorant Garamond',serif; }
+    .editorial-band strong { font:italic 1.35rem 'Bodoni Moda',serif; }
     .section-intro { margin:2.5rem 0 1.5rem; }
     .section-intro p { max-width:43rem; }
-    .creator-card { height:100%; overflow:hidden; background:var(--sand); border:1px solid rgba(117,22,45,.45); }
-    .creator-card img { width:100%; height:17rem; display:block; object-fit:cover; object-position:center 28%; }
-    .creator-body { padding:1rem 1.1rem 1.15rem; }
+    .creator-card { min-height:23rem; height:23rem; display:grid; grid-template-rows:13rem 1fr; overflow:hidden; background:var(--sand); border:1px solid rgba(117,22,45,.45); }
+    .creator-card img { width:100%; height:100%; display:block; object-fit:cover; object-position:center 28%; }
+    .creator-body { min-height:0; padding:.8rem .95rem .9rem; display:flex; flex-direction:column; }
     .creator-body .meta { display:flex; justify-content:space-between; color:var(--burgundy); font-size:.58rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
-    .creator-body h3 { margin:.55rem 0 .35rem; font-size:2rem; }
-    .creator-body p { margin:0; font-size:.72rem; }
+    .creator-body h3 { margin:.45rem 0 .3rem; font-size:1.75rem; }
+    .creator-body p { margin:auto 0 0; font-size:.72rem; }
+    div[data-testid="stHorizontalBlock"]:has(.creator-card) { align-items:stretch; }
+    div[data-testid="stHorizontalBlock"]:has(.creator-card) > div[data-testid="stColumn"] { display:flex; flex-direction:column; }
+    div[data-testid="stHorizontalBlock"]:has(.creator-card) > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] { height:100%; }
+    div[data-testid="stHorizontalBlock"]:has(.creator-card) > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has([data-testid="stButton"]) { margin-top:auto; }
+    .st-key-creator_spotlight .section-intro { margin:1rem 0 .8rem; }
+    .st-key-creator_spotlight .section-intro .eyebrow { margin-bottom:.45rem; }
+    .st-key-creator_spotlight .section-intro h2 { margin:0 0 .45rem; font-size:clamp(2.6rem,3.7vw,3.9rem) !important; line-height:.9 !important; }
+    .st-key-creator_spotlight .section-intro p { margin:0; max-width:50rem; font-size:.88rem; line-height:1.45; }
+    .st-key-creator_spotlight .creator-card { min-height:18.5rem; height:18.5rem; grid-template-rows:10.5rem 1fr; }
+    .st-key-creator_spotlight .creator-body { padding:.7rem .9rem .8rem; }
+    .st-key-creator_spotlight .creator-body .meta { font-size:.5rem; }
+    .st-key-creator_spotlight .creator-body h3 { margin:.35rem 0 .25rem; font-size:1.55rem; }
+    .st-key-creator_spotlight .creator-body p { font-size:.63rem; }
+    .st-key-creator_spotlight [data-testid="stVerticalBlock"] { gap:.6rem; }
+    .st-key-creator_spotlight [data-testid="stExpander"] summary { min-height:2.25rem; padding:.35rem .7rem; }
+    [data-testid="stExpander"]:has(.profile-note) { font-family:'Bodoni Moda',serif !important; }
+    [data-testid="stExpander"]:has(.profile-note) details[open] { min-height:13.25rem; }
+    [data-testid="stExpander"]:has(.profile-note) summary p { font-size:1rem; letter-spacing:-.02em; }
+    [data-testid="stExpander"]:has(.profile-note) [data-testid="stMarkdownContainer"] p { font-size:1rem; line-height:1.4; letter-spacing:-.02em; }
+    .st-key-creator_spotlight .stButton > button { min-height:2.35rem; padding:.45rem .75rem; font-size:.68rem; }
+    .st-key-creator_spotlight .disclosure { margin:.7rem 0 0; font-size:.56rem; }
+    .profile-note { min-height:4.05em; margin:.35rem 0 .1rem; color:var(--burgundy); font:italic 500 1rem/1.35 'Bodoni Moda',serif; letter-spacing:-.015em; }
+    @keyframes creator-section-reveal { from { opacity:0; transform:translateY(3.5rem); } to { opacity:1; transform:translateY(0); } }
+    @supports (animation-timeline:view()) {
+      .st-key-creator_spotlight { animation:creator-section-reveal 1s cubic-bezier(.2,.7,.2,1) both; animation-timeline:view(block); animation-range:entry 8% entry 65%; }
+    }
     .disclosure { margin:1.5rem 0; color:var(--burgundy); font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; }
     .metric-card { min-height:9rem; padding:1.2rem; display:flex; flex-direction:column; justify-content:space-between; color:var(--champagne); background:var(--maroon); border:1px solid var(--sand); }
     .metric-card span { color:var(--sand); font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; }
-    .metric-card strong { font:500 clamp(2rem,4vw,3.5rem)/1 'Cormorant Garamond',serif; }
+    .metric-card strong { font:500 clamp(2rem,4vw,3.5rem)/1 'Bodoni Moda',serif; }
     .analytics-heading h1 { margin:.15rem 0 .35rem; font-size:clamp(3.5rem,5.5vw,5.8rem) !important; }
     .analytics-heading .page-lede { margin:.15rem 0 1.2rem; }
     .analytics-note { padding:.8rem 1rem; background:rgba(242,217,160,.48); border-radius:12px; color:var(--maroon); font-size:.72rem; line-height:1.45; }
@@ -90,7 +116,7 @@ st.markdown(
     .match-card h3 { margin:.2rem 0; font-size:2rem; }
     .match-score { color:var(--burgundy); font:600 .65rem 'DM Sans',sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .pipeline-step { min-height:9rem; padding:1rem; color:var(--champagne); background:var(--burgundy); border-top:2px solid var(--sand); }
-    .pipeline-step span { color:var(--sand); font:italic 1.1rem 'Cormorant Garamond',serif; }
+    .pipeline-step span { color:var(--sand); font:italic 1.1rem 'Bodoni Moda',serif; }
     .pipeline-step h3 { margin:.6rem 0; color:var(--champagne) !important; font-size:1.65rem; }
     .pipeline-step p { font-size:.72rem; }
     .stButton > button, .stDownloadButton > button, [data-testid="stFormSubmitButton"] > button { color:var(--champagne); background:var(--burgundy); border:1px solid var(--burgundy); border-radius:0; font-weight:600; letter-spacing:.07em; text-transform:uppercase; }
@@ -99,7 +125,8 @@ st.markdown(
     [data-testid="stExpander"] { background:rgba(242,217,160,.45); border:1px solid rgba(117,22,45,.35); border-radius:0; }
     [data-testid="stDataFrame"] { border:1px solid var(--burgundy); }
     hr { border-color:rgba(117,22,45,.35); }
-    @media (max-width:800px) { .block-container{padding-left:1rem;padding-right:1rem}.hero-panel{min-height:0}.creator-card img{height:20rem}.editorial-band{flex-direction:column;gap:.4rem} }
+    @media (max-width:800px) { .block-container{padding-left:1rem;padding-right:1rem}.hero-panel{min-height:0}.creator-card,.st-key-creator_spotlight .creator-card{min-height:0;height:auto;grid-template-rows:20rem auto}.editorial-band{flex-direction:column;gap:.4rem} }
+    @media (prefers-reduced-motion:reduce) { .st-key-creator_spotlight { animation:none !important; opacity:1; transform:none; } }
     </style>
     """,
     unsafe_allow_html=True,
@@ -154,7 +181,20 @@ def creator_card(creator: pd.Series, key_prefix: str) -> None:
     with st.expander("View profile"):
         st.write(f"**Audience:** {creator['audience']}  ·  **Location:** {creator['location']}")
         st.write(f"**Indicative demo fee:** ₹{int(creator['estimated_fee']):,}")
-        st.caption("Fictional persona and demonstration metrics.")
+        profile_notes = {
+            1: "Luminous makeup stories with a warm, editorial finish.",
+            2: "Calm, ingredient-led skincare told with everyday ease.",
+            3: "Soft-glam artistry shaped by romantic visual storytelling.",
+            4: "Gentle barrier-care rituals made clear, comforting, and approachable.",
+            5: "Polished luxury beauty framed through cinematic detail and modern glamour.",
+            6: "Bold color, precise technique, and celebratory makeup with high-energy charm.",
+            7: "Thoughtful glow routines balancing clinical insight with sensorial calm.",
+            8: "Beauty, style, and daily rituals woven into an effortlessly personal world.",
+            9: "Refined fragrance and beauty edits with a distinctly editorial point of view.",
+            10: "Fresh, budget-conscious skincare guidance grounded in consistency and care.",
+        }
+        note = profile_notes[int(creator["creator_id"])]
+        st.markdown(f'<p class="profile-note">{note}</p>', unsafe_allow_html=True)
     shortlist = st.session_state.setdefault("shortlist", [])
     creator_id = int(creator["creator_id"])
     label = "Remove from shortlist" if creator_id in shortlist else "Add to shortlist"
@@ -206,13 +246,14 @@ def render_home() -> None:
         st.image(str(IMAGE_DIR / "hero_beauty_still_life.jpg"), width="stretch")
 
     st.markdown('<div class="editorial-band"><strong>Beauty is personal.</strong><strong>Influence should feel that way, too.</strong><span>Curated connections, grounded in real insight.</span></div>', unsafe_allow_html=True)
-    st.markdown('<div class="section-intro"><div class="eyebrow">Creator spotlight</div><h2>Faces shaping <em>what comes next.</em></h2><p>A considered selection of beauty voices with distinct points of view and genuinely engaged communities.</p></div>', unsafe_allow_html=True)
-    creators = load_creators().head(3)
-    columns = st.columns(3, gap="medium")
-    for column, (_, creator) in zip(columns, creators.iterrows()):
-        with column:
-            creator_card(creator, "home")
-    st.markdown('<p class="disclosure">All creator profiles and portraits shown are fictional and AI-generated.</p>', unsafe_allow_html=True)
+    with st.container(key="creator_spotlight"):
+        st.markdown('<div class="section-intro"><div class="eyebrow">Creator spotlight</div><h2>Faces shaping <em>what comes next.</em></h2><p>A considered selection of beauty voices with distinct points of view and genuinely engaged communities.</p></div>', unsafe_allow_html=True)
+        creators = load_creators().head(3)
+        columns = st.columns(3, gap="medium")
+        for column, (_, creator) in zip(columns, creators.iterrows()):
+            with column:
+                creator_card(creator, "home")
+        st.markdown('<p class="disclosure">All creator profiles and portraits shown are fictional and AI-generated.</p>', unsafe_allow_html=True)
 
 
 def render_creators() -> None:
@@ -307,7 +348,7 @@ def render_analytics() -> None:
         distribution.loc[len(distribution)] = ["Other", other_count]
     fig_one = px.pie(distribution, names="category", values="records", hole=.55, color_discrete_sequence=rose_scale)
     fig_one.update_traces(textinfo="none", hovertemplate="%{label}<br>%{value:,} creators<br>%{percent}<extra></extra>")
-    fig_one.add_annotation(text=f"<b>{len(frame):,}</b><br>records", x=.5, y=.5, showarrow=False, font=dict(family="Cormorant Garamond", size=17, color=PALETTE["wine"]))
+    fig_one.add_annotation(text=f"<b>{len(frame):,}</b><br>records", x=.5, y=.5, showarrow=False, font=dict(family="Bodoni Moda", size=17, color=PALETTE["wine"]))
     fig_one.update_layout(**{**chart_layout, "margin": dict(l=15, r=15, t=15, b=80)}, legend=dict(orientation="h", y=-.12, x=.5, xanchor="center", font=dict(size=10), itemwidth=30))
     top_share = category_counts.iloc[0] / len(frame) * 100
 
