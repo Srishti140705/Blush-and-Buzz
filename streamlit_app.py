@@ -39,10 +39,22 @@ PALETTE = {
     "wine": "#3B010B",
 }
 
-SIDEBAR_BG_PATH = IMAGE_DIR / "sidebar-floral-bg.png"
+SIDEBAR_BG_PATH = IMAGE_DIR / "sidebar-bg.png"
 SIDEBAR_BG_URI = (
     f"data:image/png;base64,{base64.b64encode(SIDEBAR_BG_PATH.read_bytes()).decode()}"
     if SIDEBAR_BG_PATH.exists()
+    else ""
+)
+PAGE_BG_PATH = IMAGE_DIR / "page-bg.png"
+PAGE_BG_URI = (
+    f"data:image/png;base64,{base64.b64encode(PAGE_BG_PATH.read_bytes()).decode()}"
+    if PAGE_BG_PATH.exists()
+    else ""
+)
+QUOTE_BG_PATH = IMAGE_DIR / "quote-banner-bg.png"
+QUOTE_BG_URI = (
+    f"data:image/png;base64,{base64.b64encode(QUOTE_BG_PATH.read_bytes()).decode()}"
+    if QUOTE_BG_PATH.exists()
     else ""
 )
 
@@ -50,17 +62,22 @@ SIDEBAR_BG_URI = (
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600&display=swap');
     :root { --champagne:#F2E5C6; --sand:#F2D9A0; --burgundy:#75162D; --maroon:#560B18; --wine:#3B010B; }
     html, body, [class*="css"] { font-family:'DM Sans',sans-serif; color:var(--wine); }
-    .stApp { background:var(--champagne); }
+    .stApp { background-color:var(--champagne); background-image:linear-gradient(rgba(242,229,198,.84),rgba(242,229,198,.84)),url("__PAGE_BG_URI__"); background-size:cover; background-attachment:fixed; }
     [data-testid="stHeader"] { background:transparent; }
     [data-testid="stSidebar"] { background-color:var(--wine); background-image:linear-gradient(180deg,rgba(59,1,11,.3),rgba(59,1,11,.62)),url("__SIDEBAR_BG_URI__"); background-size:cover; background-position:center top; border-right:1px solid var(--sand); }
     [data-testid="stSidebar"] * { color:var(--champagne); }
+    [data-testid="stSidebar"] .block-container { padding:1.65rem 1.45rem 1.35rem; }
     [data-testid="stSidebar"] .stRadio label { padding:.35rem .5rem; border-bottom:1px solid rgba(242,217,160,.25); }
     [data-testid="stSidebar"] [data-baseweb="radio"] > div:first-child { border-color:var(--sand); }
+    [data-testid="stSidebar"] [data-testid="stVerticalBlock"] { gap:.7rem; }
+    .shortlist-header { display:flex; align-items:center; gap:.55rem; margin:.15rem 0 .45rem; }
+    .shortlist-title { color:var(--sand); font:600 .65rem/1 'DM Sans',sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+    .shortlist-count { width:1.35rem; height:1.35rem; display:inline-grid; place-items:center; border-radius:50%; color:var(--wine) !important; background:var(--sand); font:700 .68rem/1 'DM Sans',sans-serif; }
     .block-container { max-width:1500px; padding-top:2rem; padding-bottom:4rem; }
-    h1,h2,h3,.editorial-title,.brand-wordmark { font-family:'Bodoni Moda',serif !important; font-weight:500 !important; letter-spacing:-.045em; }
+    h1,h2,h3,.editorial-title,.brand-wordmark { font-family:'Cormorant Garamond',serif !important; font-weight:500 !important; letter-spacing:-.045em; }
     h1 { color:var(--wine) !important; font-size:clamp(3.6rem,7vw,7rem) !important; line-height:.9 !important; }
     h2 { color:var(--wine) !important; font-size:clamp(2.5rem,4.5vw,4.8rem) !important; line-height:.95 !important; }
     h3 { color:var(--wine) !important; }
@@ -74,7 +91,7 @@ st.markdown(
     .hero-panel h1 { margin:.3rem 0 1.4rem; }
     .hero-panel em { font-weight:400; }
     .editorial-band { margin:1.5rem 0 3rem; padding:1.25rem 1.5rem; display:flex; justify-content:space-between; gap:2rem; color:var(--champagne); background:var(--wine); }
-    .editorial-band strong { font:italic 1.35rem 'Bodoni Moda',serif; }
+    .editorial-band strong { font:italic 1.35rem 'Cormorant Garamond',serif; }
     .section-intro { margin:2.5rem 0 1.5rem; }
     .section-intro p { max-width:43rem; }
     .creator-card { min-height:23rem; height:23rem; display:grid; grid-template-rows:13rem 1fr; overflow:hidden; background:var(--sand); border:1px solid rgba(117,22,45,.45); }
@@ -104,7 +121,7 @@ st.markdown(
     [data-testid="stExpander"]:has(.profile-note) [data-testid="stMarkdownContainer"] p { font-size:1rem; line-height:1.4; letter-spacing:-.02em; }
     .st-key-creator_spotlight .stButton > button { min-height:2.35rem; padding:.45rem .75rem; font-size:.68rem; }
     .st-key-creator_spotlight .disclosure { margin:.7rem 0 0; font-size:.56rem; }
-    .profile-note { min-height:4.05em; margin:.35rem 0 .1rem; color:var(--burgundy); font:italic 500 1rem/1.35 'Bodoni Moda',serif; letter-spacing:-.015em; }
+    .profile-note { min-height:4.05em; margin:.35rem 0 .1rem; color:var(--burgundy); font:italic 500 1rem/1.35 'Cormorant Garamond',serif; letter-spacing:-.015em; }
     @keyframes creator-section-reveal { from { opacity:0; transform:translateY(3.5rem); } to { opacity:1; transform:translateY(0); } }
     @supports (animation-timeline:view()) {
       .st-key-creator_spotlight { animation:creator-section-reveal 1s cubic-bezier(.2,.7,.2,1) both; animation-timeline:view(block); animation-range:entry 8% entry 65%; }
@@ -112,7 +129,7 @@ st.markdown(
     .disclosure { margin:1.5rem 0; color:var(--burgundy); font-size:.65rem; letter-spacing:.08em; text-transform:uppercase; }
     .metric-card { min-height:9rem; padding:1.2rem; display:flex; flex-direction:column; justify-content:space-between; color:var(--champagne); background:var(--maroon); border:1px solid var(--sand); }
     .metric-card span { color:var(--sand); font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; }
-    .metric-card strong { font:500 clamp(2rem,4vw,3.5rem)/1 'Bodoni Moda',serif; }
+    .metric-card strong { font:500 clamp(2rem,4vw,3.5rem)/1 'Cormorant Garamond',serif; }
     .analytics-heading h1 { margin:.15rem 0 .35rem; font-size:clamp(3.5rem,5.5vw,5.8rem) !important; }
     .analytics-heading .page-lede { margin:.15rem 0 1.2rem; }
     .analytics-note { padding:.8rem 1rem; background:rgba(242,217,160,.48); border-radius:12px; color:var(--maroon); font-size:.72rem; line-height:1.45; }
@@ -123,19 +140,46 @@ st.markdown(
     .match-card h3 { margin:.2rem 0; font-size:2rem; }
     .match-score { color:var(--burgundy); font:600 .65rem 'DM Sans',sans-serif; letter-spacing:.1em; text-transform:uppercase; }
     .pipeline-step { min-height:9rem; padding:1rem; color:var(--champagne); background:var(--burgundy); border-top:2px solid var(--sand); }
-    .pipeline-step span { color:var(--sand); font:italic 1.1rem 'Bodoni Moda',serif; }
+    .pipeline-step span { color:var(--sand); font:italic 1.1rem 'Cormorant Garamond',serif; }
     .pipeline-step h3 { margin:.6rem 0; color:var(--champagne) !important; font-size:1.65rem; }
     .pipeline-step p { font-size:.72rem; }
+    .home-hero-copy { min-height:22.5rem; padding:clamp(1.65rem,3vw,3rem); display:flex; flex-direction:column; justify-content:center; background:rgba(242,229,198,.72); border:1px solid rgba(117,22,45,.28); }
+    .home-hero-copy h1 { margin:.25rem 0 1rem; font-size:clamp(3rem,4.2vw,4.7rem) !important; line-height:.86 !important; }
+    .home-hero-copy .page-lede { margin:0; max-width:33rem; font-size:.96rem; line-height:1.55; }
+    .home-hero-image { width:100%; height:22.5rem; display:block; object-fit:cover; border:1px solid rgba(117,22,45,.28); }
+    .st-key-home_hero [data-testid="stVerticalBlock"] { gap:.65rem; }
+    .st-key-home_hero .stButton > button { min-height:2.7rem; }
+    .home-section-label { margin-bottom:.6rem; color:var(--burgundy); font:600 .63rem/1.3 'DM Sans',sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+    .home-categories-heading { display:flex; align-items:center; justify-content:space-between; margin:1.25rem 0 .65rem; }
+    .home-categories-heading span:last-child { font:600 .62rem 'DM Sans',sans-serif; letter-spacing:.11em; text-transform:uppercase; }
+    .home-category-image { width:100%; aspect-ratio:16/9; display:block; object-fit:cover; border:1px solid rgba(117,22,45,.26); border-bottom:0; }
+    .st-key-home_categories [data-testid="stVerticalBlock"] { gap:0; }
+    .st-key-home_categories .stButton > button { min-height:2.45rem; color:var(--wine); background:rgba(242,229,198,.76); border-color:rgba(117,22,45,.3); font:500 1.15rem 'Cormorant Garamond',serif; letter-spacing:0; text-transform:none; }
+    .st-key-home_categories .stButton > button:hover { color:var(--champagne); background:var(--burgundy); }
+    .home-quote-banner { margin:.85rem 0 1.1rem; min-height:7.75rem; padding:1.4rem 2rem; display:grid; grid-template-columns:repeat(3,1fr); align-items:center; color:var(--champagne); background-color:var(--wine); background-image:linear-gradient(90deg,rgba(59,1,11,.25),rgba(59,1,11,.12)),url("__QUOTE_BG_URI__"); background-size:cover; background-position:center; border:1px solid rgba(242,217,160,.35); }
+    .home-quote-banner p { margin:0; padding:0 1.5rem; text-align:center; font:italic 500 clamp(1.25rem,1.8vw,1.75rem)/1.15 'Cormorant Garamond',serif; }
+    .home-quote-banner p + p { border-left:1px solid rgba(242,217,160,.45); }
+    .home-editorial-section { margin:.85rem 0 0; }
+    .home-editorial-image { width:100%; height:19rem; display:block; object-fit:cover; object-position:center 42%; border:1px solid rgba(117,22,45,.28); }
+    .home-section-copy { min-height:19rem; padding:clamp(1.35rem,2.5vw,2.6rem); position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:center; background:rgba(242,229,198,.7); border:1px solid rgba(117,22,45,.2); }
+    .home-section-copy h2 { max-width:30rem; margin:.05rem 0 .55rem; font-size:clamp(2.8rem,4.5vw,4.7rem) !important; line-height:.82 !important; }
+    .home-section-copy p { max-width:31rem; margin:0; color:var(--maroon); font-size:.88rem; line-height:1.55; }
+    .home-section-copy.has-floral > *:not(.home-floral) { position:relative; z-index:1; }
+    .home-floral { width:42%; max-width:17rem; position:absolute; right:-1.8rem; bottom:-2.5rem; opacity:.58; pointer-events:none; }
+    .st-key-home_creators .stButton > button,.st-key-home_match .stButton > button { width:min(18rem,100%); min-height:2.65rem; }
+    .st-key-home_match { margin-top:1rem; }
+    .home-match-gallery { min-height:19rem; padding:.7rem; display:grid; grid-template-columns:1fr 1fr; gap:.7rem; background:rgba(242,217,160,.42); border:1px solid rgba(117,22,45,.2); }
+    .home-match-gallery img { width:100%; height:17.6rem; display:block; object-fit:cover; }
     .stButton > button, .stDownloadButton > button, [data-testid="stFormSubmitButton"] > button { color:var(--champagne); background:var(--burgundy); border:1px solid var(--burgundy); border-radius:0; font-weight:600; letter-spacing:.07em; text-transform:uppercase; }
     .stButton > button:hover, .stDownloadButton > button:hover, [data-testid="stFormSubmitButton"] > button:hover { color:var(--sand); background:var(--wine); border-color:var(--wine); }
     [data-baseweb="select"] > div, .stTextInput input, .stNumberInput input { background:var(--champagne); border-color:rgba(117,22,45,.45); border-radius:0; }
     [data-testid="stExpander"] { background:rgba(242,217,160,.45); border:1px solid rgba(117,22,45,.35); border-radius:0; }
     [data-testid="stDataFrame"] { border:1px solid var(--burgundy); }
     hr { border-color:rgba(117,22,45,.35); }
-    @media (max-width:800px) { .block-container{padding-left:1rem;padding-right:1rem}.hero-panel{min-height:0}.creator-card,.st-key-creator_spotlight .creator-card{min-height:0;height:auto;grid-template-rows:20rem auto}.editorial-band{flex-direction:column;gap:.4rem} }
+    @media (max-width:800px) { .block-container{padding:1rem}.hero-panel{min-height:0}.creator-card,.st-key-creator_spotlight .creator-card{min-height:0;height:auto;grid-template-rows:20rem auto}.editorial-band{flex-direction:column;gap:.4rem}.home-hero-copy,.home-section-copy{min-height:0}.home-hero-image{height:20rem}.home-quote-banner{grid-template-columns:1fr;padding:1.1rem}.home-quote-banner p{padding:.8rem .4rem}.home-quote-banner p + p{border-left:0;border-top:1px solid rgba(242,217,160,.45)}.home-editorial-image{height:18rem}.home-match-gallery{min-height:0}.home-match-gallery img{height:14rem}.home-floral{width:55%;opacity:.35} }
     @media (prefers-reduced-motion:reduce) { .st-key-creator_spotlight { animation:none !important; opacity:1; transform:none; } }
     </style>
-    """.replace("__SIDEBAR_BG_URI__", SIDEBAR_BG_URI),
+    """.replace("__SIDEBAR_BG_URI__", SIDEBAR_BG_URI).replace("__PAGE_BG_URI__", PAGE_BG_URI).replace("__QUOTE_BG_URI__", QUOTE_BG_URI),
     unsafe_allow_html=True,
 )
 
@@ -222,6 +266,12 @@ def open_shortlisted_creator(name: str) -> None:
     st.session_state.creator_search = name
 
 
+def open_creator_category(category: str) -> None:
+    st.session_state.page_nav = "Creators"
+    st.session_state.creator_search = ""
+    st.session_state.creator_niche = category
+
+
 def render_sidebar() -> str:
     with st.sidebar:
         st.markdown('<div class="brand-wordmark">B&amp;B Studio</div><div class="brand-subtitle">Blush &amp; Buzz</div>', unsafe_allow_html=True)
@@ -229,7 +279,10 @@ def render_sidebar() -> str:
         selected = st.radio("Studio navigation", ["Home", "Creators", "Matchmaker", "Analytics", "Data Atelier"], key="page_nav", label_visibility="collapsed")
         st.markdown("---")
         shortlist = st.session_state.setdefault("shortlist", [])
-        st.markdown(f'<div class="eyebrow eyebrow-light">Shortlist · {len(shortlist)}</div>', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="shortlist-header"><span class="shortlist-title">Shortlist</span><span class="shortlist-count">{len(shortlist)}</span></div>',
+            unsafe_allow_html=True,
+        )
         if shortlist:
             creators = load_creators()
             for creator_id in shortlist:
@@ -250,29 +303,87 @@ def render_sidebar() -> str:
 
 
 def render_home() -> None:
-    left, right = st.columns([1.05, 0.95], gap="small")
-    with left:
-        st.markdown(
-            """<section class="hero-panel"><div class="eyebrow">A new language of beauty influence</div>
-            <h1>Where beauty<br><em>meets influence.</em></h1>
-            <p class="page-lede">Discover inspiring creators, explore meaningful insights, and find the perfect voice for your next campaign.</p></section>""",
-            unsafe_allow_html=True,
-        )
-        action_one, action_two = st.columns(2)
-        action_one.button("Explore creators", on_click=set_page, args=("Creators",), width="stretch")
-        action_two.button("Find your match", on_click=set_page, args=("Matchmaker",), width="stretch")
-    with right:
-        st.image(str(IMAGE_DIR / "hero_beauty_still_life.jpg"), width="stretch")
+    hero_uri = image_uri(str(IMAGE_DIR / "hero-beauty.jpg"))
+    creator_uri = image_uri(str(IMAGE_DIR / "creators-portrait.jpg"))
+    floral_uri = image_uri(str(IMAGE_DIR / "floral-right.png"))
+    perfume_uri = image_uri(str(IMAGE_DIR / "match-perfume.jpg"))
+    swatches_uri = image_uri(str(IMAGE_DIR / "match-swatches.jpg"))
 
-    st.markdown('<div class="editorial-band"><strong>Beauty is personal.</strong><strong>Influence should feel that way, too.</strong><span>Curated connections, grounded in real insight.</span></div>', unsafe_allow_html=True)
-    with st.container(key="creator_spotlight"):
-        st.markdown('<div class="section-intro"><div class="eyebrow">Creator spotlight</div><h2>Faces shaping <em>what comes next.</em></h2><p>A considered selection of beauty voices with distinct points of view and genuinely engaged communities.</p></div>', unsafe_allow_html=True)
-        creators = load_creators().head(3)
-        columns = st.columns(3, gap="medium")
-        for column, (_, creator) in zip(columns, creators.iterrows()):
+    with st.container(key="home_hero"):
+        left, right = st.columns([1.04, 0.96], gap="small", vertical_alignment="top")
+        with left:
+            st.markdown(
+                """<section class="home-hero-copy"><div class="eyebrow">A new language of beauty influence</div>
+                <h1>Where beauty<br><em>meets influence.</em></h1>
+                <p class="page-lede">Discover inspiring creators, explore meaningful insights, and find the perfect voice for your next campaign.</p></section>""",
+                unsafe_allow_html=True,
+            )
+            action_one, action_two = st.columns(2, gap="small")
+            action_one.button("Explore creators", on_click=set_page, args=("Creators",), width="stretch", key="hero_creators")
+            action_two.button("Find your match", on_click=set_page, args=("Matchmaker",), width="stretch", key="hero_match")
+        with right:
+            st.markdown(f'<img class="home-hero-image" src="{hero_uri}" alt="Warm beauty still life">', unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="home-categories-heading"><span class="home-section-label">Explore by category</span><span>View all categories →</span></div>',
+        unsafe_allow_html=True,
+    )
+    categories = [
+        ("Makeup", "category-makeup.jpg"),
+        ("Skincare", "category-skincare.jpg"),
+        ("Luxury Beauty", "category-luxury.jpg"),
+        ("Lifestyle", "category-lifestyle.jpg"),
+    ]
+    with st.container(key="home_categories"):
+        category_columns = st.columns(4, gap="small")
+        for column, (category, filename) in zip(category_columns, categories):
             with column:
-                creator_card(creator, "home")
-        st.markdown('<p class="disclosure">All creator profiles and portraits shown are fictional and AI-generated.</p>', unsafe_allow_html=True)
+                category_uri = image_uri(str(IMAGE_DIR / filename))
+                st.markdown(f'<img class="home-category-image" src="{category_uri}" alt="{category}">', unsafe_allow_html=True)
+                st.button(category, key=f"category_{category}", on_click=open_creator_category, args=(category,), width="stretch")
+
+    st.markdown(
+        """<section class="home-quote-banner">
+        <p>Beauty is personal.</p>
+        <p>Influence should feel that way, too.</p>
+        <p>Curated connections, grounded in real insight.</p>
+        </section>""",
+        unsafe_allow_html=True,
+    )
+
+    with st.container(key="home_creators"):
+        creator_left, creator_right = st.columns([.9, 1.1], gap="small", vertical_alignment="top")
+        with creator_left:
+            st.markdown(f'<img class="home-editorial-image" src="{creator_uri}" alt="Beauty creator portrait">', unsafe_allow_html=True)
+        with creator_right:
+            st.markdown(
+                f"""<section class="home-section-copy has-floral">
+                <img class="home-floral" src="{floral_uri}" alt="">
+                <div class="home-section-label">People behind beauty's biggest moments</div>
+                <h2>Creators<br>Who Inspire</h2>
+                <p>From rising voices to established names, explore creator profiles, audiences, and content themes—all in one place.</p>
+                </section>""",
+                unsafe_allow_html=True,
+            )
+            st.button("Explore creators", on_click=set_page, args=("Creators",), width="stretch", key="section_creators")
+
+    with st.container(key="home_match"):
+        match_left, match_right = st.columns([.9, 1.1], gap="small", vertical_alignment="top")
+        with match_left:
+            st.markdown(
+                """<section class="home-section-copy">
+                <div class="home-section-label">Turn insights into impact</div>
+                <h2>Find Your<br>Perfect Match</h2>
+                <p>Discover creators who align with your brand, audience, and campaign goals using data-driven recommendations.</p>
+                </section>""",
+                unsafe_allow_html=True,
+            )
+            st.button("Find your match", on_click=set_page, args=("Matchmaker",), width="stretch", key="section_match")
+        with match_right:
+            st.markdown(
+                f'<div class="home-match-gallery"><img src="{perfume_uri}" alt="Perfume still life"><img src="{swatches_uri}" alt="Makeup swatches"></div>',
+                unsafe_allow_html=True,
+            )
 
 
 def render_creators() -> None:
@@ -281,7 +392,7 @@ def render_creators() -> None:
     search_col, niche_col, sort_col = st.columns([1.4, 1, 1])
     search = search_col.text_input("Search by creator name", key="creator_search")
     niches = ["All categories", *sorted(creators.niche.unique())]
-    niche = niche_col.selectbox("Beauty category", niches)
+    niche = niche_col.selectbox("Beauty category", niches, key="creator_niche")
     sort = sort_col.selectbox("Sort", ["Featured", "Followers: high to low", "Followers: low to high", "Engagement: high to low"])
     filtered = creators[creators.name.str.contains(search, case=False, na=False)]
     if niche != "All categories":
