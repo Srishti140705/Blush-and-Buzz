@@ -39,6 +39,13 @@ PALETTE = {
     "wine": "#3B010B",
 }
 
+SIDEBAR_BG_PATH = IMAGE_DIR / "sidebar-floral-bg.png"
+SIDEBAR_BG_URI = (
+    f"data:image/png;base64,{base64.b64encode(SIDEBAR_BG_PATH.read_bytes()).decode()}"
+    if SIDEBAR_BG_PATH.exists()
+    else ""
+)
+
 
 st.markdown(
     """
@@ -48,7 +55,7 @@ st.markdown(
     html, body, [class*="css"] { font-family:'DM Sans',sans-serif; color:var(--wine); }
     .stApp { background:var(--champagne); }
     [data-testid="stHeader"] { background:transparent; }
-    [data-testid="stSidebar"] { background:var(--wine); border-right:1px solid var(--sand); }
+    [data-testid="stSidebar"] { background-color:var(--wine); background-image:linear-gradient(180deg,rgba(59,1,11,.3),rgba(59,1,11,.62)),url("__SIDEBAR_BG_URI__"); background-size:cover; background-position:center top; border-right:1px solid var(--sand); }
     [data-testid="stSidebar"] * { color:var(--champagne); }
     [data-testid="stSidebar"] .stRadio label { padding:.35rem .5rem; border-bottom:1px solid rgba(242,217,160,.25); }
     [data-testid="stSidebar"] [data-baseweb="radio"] > div:first-child { border-color:var(--sand); }
@@ -128,7 +135,7 @@ st.markdown(
     @media (max-width:800px) { .block-container{padding-left:1rem;padding-right:1rem}.hero-panel{min-height:0}.creator-card,.st-key-creator_spotlight .creator-card{min-height:0;height:auto;grid-template-rows:20rem auto}.editorial-band{flex-direction:column;gap:.4rem} }
     @media (prefers-reduced-motion:reduce) { .st-key-creator_spotlight { animation:none !important; opacity:1; transform:none; } }
     </style>
-    """,
+    """.replace("__SIDEBAR_BG_URI__", SIDEBAR_BG_URI),
     unsafe_allow_html=True,
 )
 
